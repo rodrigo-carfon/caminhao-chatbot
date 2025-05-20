@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat com o Bot</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; margin: 0; padding: 20px; }
+    #chat-container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    #chat { height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fafafa; }
+    .msg { margin: 5px 0; }
+    .user { font-weight: bold; color: #333; }
+    .bot { font-weight: bold; color: #0066cc; }
+    #input-container { display: flex; gap: 10px; }
+    input { flex: 1; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <h2>Chat com o Bot</h2>
+    <div id="chat"></div>
+    <div id="input-container">
+      <input id="msg" placeholder="Digite sua mensagem..." />
+      <button onclick="send()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    async function send() {
+      const input = document.getElementById("msg");
+      const msg = input.value.trim();
+      if (!msg) return;
+
+      const chat = document.getElementById("chat");
+      chat.innerHTML += `<div class="msg"><span class="user">Você:</span> ${msg}</div>`;
+      input.value = "";
+
+      const response = await fetch("https://SEU_N8N/webhook/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: "123", message: msg })
+      });
+
+      const data = await response.json();
+      chat.innerHTML += `<div class="msg"><span class="bot">Bot:</span> ${data.reply}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
