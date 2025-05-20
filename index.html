@@ -35,7 +35,7 @@
       chat.innerHTML += `<div class="msg"><span class="user">Você:</span> ${msg}</div>`;
       input.value = "";
 
-      const response = await fetch("https://a97e-2804-1b3-a800-da41-f863-ea28-f1c3-f310.ngrok-free.app/webhook/chat", {
+      const response = await fetch("https://a97e-2804-1b3-a800-da41-f863-ea28-f1c3-f310.ngrok-free.app/webhook-test/webhook-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: "123", message: msg })
