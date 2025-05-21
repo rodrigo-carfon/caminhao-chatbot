@@ -2,49 +2,55 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Chat com o Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat do Portfólio</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f0f0f0; margin: 0; padding: 20px; }
-    #chat-container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    #chat { height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background: #fafafa; }
-    .msg { margin: 5px 0; }
-    .user { font-weight: bold; color: #333; }
-    .bot { font-weight: bold; color: #0066cc; }
-    #input-container { display: flex; gap: 10px; }
-    input { flex: 1; padding: 10px; font-size: 16px; }
-    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    #chat-container {
+      width: 100%;
+      max-width: 400px;
+    }
   </style>
 </head>
 <body>
-  <div id="chat-container">
-    <h2>Chat com o Bot</h2>
-    <div id="chat"></div>
-    <div id="input-container">
-      <input id="msg" placeholder="Digite sua mensagem..." />
-      <button onclick="send()">Enviar</button>
-    </div>
-  </div>
 
-  <script>
-    async function send() {
-      const input = document.getElementById("msg");
-      const msg = input.value.trim();
-      if (!msg) return;
+  <h1>Bem-vindo ao meu portfólio!</h1>
+  <p>Sinta-se à vontade para conversar comigo através do chat abaixo.</p>
 
-      const chat = document.getElementById("chat");
-      chat.innerHTML += `<div class="msg"><span class="user">Você:</span> ${msg}</div>`;
-      input.value = "";
+  <div id="chat-container"></div>
 
-      const response = await fetch("https://troll-popular-guinea.ngrok-free.app/webhook-test/webhook-chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_id: "123", message: msg })
-      });
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-      const data = await response.json();
-      chat.innerHTML += `<div class="msg"><span class="bot">Bot:</span> ${data.reply}</div>`;
-      chat.scrollTop = chat.scrollHeight;
-    }
+    createChat({
+      webhookUrl: 'https://troll-popular-guinea.ngrok-free.app/webhook/webhook-chat',
+      initialMessages: [
+        'Seja bem-vindo ao meu portfólio!'
+      ],
+      target: '#chat-container'
+    });
   </script>
+
 </body>
 </html>
