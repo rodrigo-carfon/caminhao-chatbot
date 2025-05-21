@@ -3,42 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chat do Portfólio</title>
+  <title>Chat - Meu Portfólio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ece9e6, #ffffff);
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px 20px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
     }
 
     h1 {
-      color: #333;
+      font-size: 1.8em;
       margin-bottom: 10px;
+      color: #333;
     }
 
     p {
-      color: #666;
       margin-bottom: 20px;
+      color: #555;
+      font-size: 1em;
     }
 
     #chat-container {
-      width: 100%;
-      max-width: 400px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Bem-vindo ao meu portfólio!</h1>
-  <p>Sinta-se à vontade para conversar comigo através do chat abaixo.</p>
+  <div class="container">
+    <h1>Bem-vindo ao meu portfólio!</h1>
+    <p>Converse comigo pelo chat abaixo. Estou à disposição!</p>
 
-  <div id="chat-container"></div>
+    <div id="chat-container"></div>
+  </div>
 
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
@@ -46,7 +63,7 @@
     createChat({
       webhookUrl: 'https://troll-popular-guinea.ngrok-free.app/webhook/webhook-chat',
       initialMessages: [
-        'Seja bem-vindo ao meu portfólio!'
+        'Seja bem-vindo ao meu portfólio! Como posso ajudar?'
       ],
       target: '#chat-container'
     });
