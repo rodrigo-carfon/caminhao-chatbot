@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Online - Manutenção Caminhão</title>
+    <title>Chat Online - Seu Portfólio</title>
     <style>
-        /* Estilos CSS básicos para a landing page */
+        /* Estilos CSS básicos para a página */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -17,15 +17,19 @@
             background-color: #f0f2f5;
             color: #333;
             text-align: center;
+            /* Isso é para que a página tenha algum scroll, para testar o position: fixed */
+            height: 150vh;
+            display: block; /* Mudei para block para permitir scroll */
         }
 
-        .container {
+        .main-content {
             background-color: #fff;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 90%;
+            max-width: 800px;
+            margin: 50px auto; /* Centraliza o conteúdo principal */
+            text-align: left;
         }
 
         h1 {
@@ -38,47 +42,128 @@
             line-height: 1.6;
         }
 
-        /* Estilos específicos para o contêiner do chat */
-        #chat-container {
-            min-height: 400px; /* Ajuste conforme a altura desejada para o seu chat */
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden; /* Garante que o conteúdo do chat não transborde */
-            margin-top: 30px;
+        /* --- Estilos para o balão do chat --- */
+        #chat-bubble-container {
+            position: fixed; /* Fixa o elemento na tela */
+            bottom: 20px; /* Distância do fundo */
+            right: 20px;  /* Distância da direita */
+            width: 350px; /* Largura do balão do chat */
+            height: 450px; /* Altura do balão do chat */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Garante que o chat dentro não transborde */
+            z-index: 1000; /* Garante que o chat fique acima de outros elementos */
+            display: none; /* Começa escondido */
+            flex-direction: column;
         }
 
-        /* Estilos responsivos */
+        #chat-toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%; /* Faz um círculo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1001; /* Fica acima do contêiner do chat */
+            border: none;
+            outline: none;
+        }
+
+        #chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chat-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chat-content {
+            flex-grow: 1; /* Permite que o conteúdo do chat ocupe o espaço restante */
+        }
+
+        /* Estilos responsivos para o balão */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            #chat-bubble-container {
+                width: 90vw; /* Ocupa 90% da largura da tela */
+                height: 70vh; /* Ocupa 70% da altura da tela */
+                bottom: 10px;
+                right: 5vw; /* 5% de margem em cada lado */
+                left: 5vw;
             }
-            #chat-container {
-                min-height: 350px; /* Um pouco menor em telas pequenas */
+            #chat-toggle-button {
+                bottom: 10px;
+                right: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bem-vindo(a) ao Chat de acompanhamento de manutenções</h1>
-        <p>Use o chat abaixo para tirar suas dúvidas.</p>
+    <div class="main-content">
+        <h1>Conteúdo Principal da Sua Página</h1>
+        <p>Aqui você pode colocar qualquer informação que queira que seus visitantes vejam, como sobre seu portfólio, serviços, etc.</p>
+        <p>Role a página para baixo para ver o botão do chat no canto inferior direito.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 
-        <div id="chat-container">
+    <button id="chat-toggle-button">💬</button>
+
+    <div id="chat-bubble-container">
+        <div id="chat-header">
+            <span>Conversar conosco</span>
+            <button id="close-chat-button">X</button>
+        </div>
+        <div id="chat-actual-content" class="chat-content">
             </div>
-
-        <p style="margin-top: 30px; font-size: 0.9em; color: #777;">Fico feliz em te ajudar!</p>
     </div>
 
     <script type="module">
         import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
+        // Inicializa o chat no contêiner 'chat-actual-content' dentro do balão
         createChat({
             webhookUrl: 'https://troll-popular-guinea.ngrok-free.app/webhook/webhook-chat',
             initialMessages: [
-                'Como posso ajudar?'
+                'Seja bem-vindo ao meu portfólio! Como posso ajudar?'
             ],
-            target: '#chat-container' // Aponta para o div que criamos
+            target: '#chat-actual-content' // O ID do div onde o chat será injetado
+        });
+
+        // Lógica para abrir e fechar o balão do chat
+        const chatToggleButton = document.getElementById('chat-toggle-button');
+        const chatBubbleContainer = document.getElementById('chat-bubble-container');
+        const closeChatButton = document.getElementById('close-chat-button');
+
+        chatToggleButton.addEventListener('click', () => {
+            if (chatBubbleContainer.style.display === 'flex') {
+                chatBubbleContainer.style.display = 'none';
+            } else {
+                chatBubbleContainer.style.display = 'flex';
+            }
+        });
+
+        closeChatButton.addEventListener('click', () => {
+            chatBubbleContainer.style.display = 'none';
         });
     </script>
 </body>
