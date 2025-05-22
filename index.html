@@ -1,73 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chat - Meu Portfólio</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Online - Seu Portfólio</title>
+    <style>
+        /* Estilos CSS básicos para a landing page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: #333;
+            text-align: center;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ece9e6, #ffffff);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+        }
 
-    .container {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 30px 20px;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-    }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
 
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 10px;
-      color: #333;
-    }
+        p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
 
-    p {
-      margin-bottom: 20px;
-      color: #555;
-      font-size: 1em;
-    }
+        /* Estilos específicos para o contêiner do chat */
+        #chat-container {
+            min-height: 400px; /* Ajuste conforme a altura desejada para o seu chat */
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden; /* Garante que o conteúdo do chat não transborde */
+            margin-top: 30px;
+        }
 
-    #chat-container {
-      margin-top: 20px;
-    }
-  </style>
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            #chat-container {
+                min-height: 350px; /* Um pouco menor em telas pequenas */
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Bem-vindo(a) ao Chat do Meu Portfólio!</h1>
+        <p>Use o chat abaixo para tirar suas dúvidas, conversar sobre projetos ou apenas dizer olá!</p>
 
-  <div class="container">
-    <h1>Bem-vindo ao meu portfólio!</h1>
-    <p>Converse comigo pelo chat abaixo. Estou à disposição!</p>
+        <div id="chat-container">
+            </div>
 
-    <div id="chat-container"></div>
-  </div>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #777;">Fico feliz em te ajudar!</p>
+    </div>
 
-  <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-    createChat({
-      webhookUrl: 'https://troll-popular-guinea.ngrok-free.app/webhook/webhook-chat',
-      initialMessages: [
-        'Seja bem-vindo ao meu portfólio! Como posso ajudar?'
-      ],
-      target: '#chat-container'
-    });
-  </script>
-
+        createChat({
+            webhookUrl: 'https://troll-popular-guinea.ngrok-free.app/webhook/webhook-chat',
+            initialMessages: [
+                'Seja bem-vindo ao meu portfólio! Como posso ajudar?'
+            ],
+            target: '#chat-container' // Aponta para o div que criamos
+        });
+    </script>
 </body>
 </html>
